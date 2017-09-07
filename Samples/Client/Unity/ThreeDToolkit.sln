@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreeDToolkit.Interfaces.Mo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreeDToolkit.Rendering.UWP", "ThreeDToolkit.Rendering.UWP\ThreeDToolkit.Rendering.UWP.vcxproj", "{E795895C-2F54-4151-A733-AB606621240A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreeDToolkit.Rendering.Unity", "ThreeDToolkit.Rendering.Unity\ThreeDToolkit.Rendering.Unity.vcxproj", "{D884E511-8782-4864-8CBC-8C6574896845}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -84,6 +86,14 @@ Global
 		{E795895C-2F54-4151-A733-AB606621240A}.Release|x86.ActiveCfg = Release|Win32
 		{E795895C-2F54-4151-A733-AB606621240A}.Release|x86.Build.0 = Release|Win32
 		{E795895C-2F54-4151-A733-AB606621240A}.Release|x86.Deploy.0 = Release|Win32
+		{D884E511-8782-4864-8CBC-8C6574896845}.Debug|x64.ActiveCfg = Debug|x64
+		{D884E511-8782-4864-8CBC-8C6574896845}.Debug|x64.Build.0 = Debug|x64
+		{D884E511-8782-4864-8CBC-8C6574896845}.Debug|x86.ActiveCfg = Debug|Win32
+		{D884E511-8782-4864-8CBC-8C6574896845}.Debug|x86.Build.0 = Debug|Win32
+		{D884E511-8782-4864-8CBC-8C6574896845}.Release|x64.ActiveCfg = Release|x64
+		{D884E511-8782-4864-8CBC-8C6574896845}.Release|x64.Build.0 = Release|x64
+		{D884E511-8782-4864-8CBC-8C6574896845}.Release|x86.ActiveCfg = Release|Win32
+		{D884E511-8782-4864-8CBC-8C6574896845}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

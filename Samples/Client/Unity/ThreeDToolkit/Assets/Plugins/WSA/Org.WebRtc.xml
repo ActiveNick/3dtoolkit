@@ -1,0 +1,1274 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "Org.WebRtc"
+    </assembly>
+    <members>
+        <member name="E:Org.WebRtc.ResolutionHelper.ResolutionChanged">
+            <summary>
+Event fires when the resolution changes.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.ResolutionHelper">
+            <summary>
+Class used to get frame size change events from renderer.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.FrameCounterHelper.FramesPerSecondChanged">
+            <summary>
+Event fires when the frame rate changes.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.FrameCounterHelper">
+            <summary>
+Class used to get frame rate events from renderer.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.ResolutionChangedEventHandler">
+            <summary>
+Delegate used to notify an update of the frame resolutions.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.FramesPerSecondChangedEventHandler">
+            <summary>
+Delegate used to notify an update of the frame per second on a video stream.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.FirstFrameRenderHelper.FirstFrameRendered">
+            <summary>
+Event fires when the first video frame renders.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.FirstFrameRenderedEventHandler">
+            <summary>
+Delegate used to notify about first video frame rendering.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.globals.FileLogSink">
+a private class only used in this file, which implements LogSink for logging to file
+
+</member>
+        <member name="E:Org.WebRtc.Media.OnMediaDevicesChanged">
+            <summary>
+Fired when audio or video device configuration changed.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.Media.SetDisplayOrientation(&lt;unknown type&gt;)">
+            <summary>
+Set display orientation, used to rotate captured video in case the
+capturer is attached to the enclosure.
+This method should be called only if WebRTC::Initialize was called with
+null core dispatcher, otherwise, the display orientation detection is
+performed internally.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.Media.OnAppSuspending">
+            <summary>
+App suspending event handler.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.Media.SelectAudioPlayoutDevice(Org.WebRtc.MediaDevice)">
+            <summary>
+Allows switching between audio playout devices (speakers).
+</summary>
+            <param name="device">Device to be used for audio playback. If null,
+default audio playout device will be used.</param>
+            <returns>True if the operation succeeded.</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.SelectAudioCaptureDevice(Org.WebRtc.MediaDevice)">
+            <summary>
+Allows switching between microphones.
+</summary>
+            <param name="device">Microphone to be used for audio capturing.If null,
+default audio recording device will be used</param>
+            <returns>True if the operation succeeded.</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.SelectVideoDevice(Org.WebRtc.MediaDevice)">
+            <summary>
+Allows switching between webcams.
+</summary>
+            <param name="device">Webcam to be used for video capturing.</param>
+        </member>
+        <member name="M:Org.WebRtc.Media.GetVideoCaptureDevices">
+            <summary>
+Retrieves system devices that can be used for video capturing (webcams).
+</summary>
+            <returns>Vector of system devices that can be used for video capturing
+(webcams).</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.GetAudioPlayoutDevices">
+            <summary>
+Retrieves system devices that can be used for audio playout (speakers).
+</summary>
+            <returns>Vector of system devices that can be used for audio playout
+(speakers).</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.GetAudioCaptureDevices">
+            <summary>
+Retrieves system devices that can be used for audio capturing.
+(microphones).
+</summary>
+            <returns>Vector of system devices that can be used for audio capturing
+(microphones).</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.CreateEncodedVideoSource(Org.WebRtc.MediaVideoTrack)">
+            <summary>
+Creates an <see cref="T:Org.WebRtc.EncodedVideoSource" /> for a video track.
+</summary>
+            <param name="track">Video track to create a <see cref="T:Org.WebRtc.EncodedVideoSource" />
+from</param>
+            <returns>Encoded video source.</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.CreateRawVideoSource(Org.WebRtc.MediaVideoTrack)">
+            <summary>
+Creates an <see cref="T:Org.WebRtc.RawVideoSource" /> for a video track.
+</summary>
+            <param name="track">Video track to create a <see cref="T:Org.WebRtc.RawVideoSource" />
+from</param>
+            <returns>Raw video source.</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.CreateMediaSource(Org.WebRtc.MediaVideoTrack,System.String)">
+            <summary>
+Creates an <see cref="T:Windows.Media.Core.IMediaSource" /> for a video track, with a given
+frame rate and identifier to be used for notifications on media
+changes.
+</summary>
+            <param name="track">Video track to create a <see cref="T:Windows.Media.Core.IMediaSource" />
+from</param>
+            <param name="framerate">Target frame rate</param>
+            <param name="id">Identifier that can be used by applications for
+distinguishing between <see cref="T:Org.WebRtc.MediaStream" />s
+when receiving media change event notifications.
+</param>
+            <returns>A media source.</returns>
+        </member>
+        <member name="M:Org.WebRtc.Media.CreateMediaStreamSource(Org.WebRtc.MediaVideoTrack,System.UInt32,System.String)">
+            <summary>
+Creates an <see cref="T:Windows.Media.Core.IMediaSource" /> for a video track, with a given
+identifier to be used for notifications on media changes.
+</summary>
+            <param name="track">Video track to create a <see cref="T:Windows.Media.Core.IMediaSource" />
+from</param>
+            <param name="id">Identifier that can be used by applications for
+distinguishing between <see cref="T:Org.WebRtc.MediaStream" />s
+when receiving media change event notifications.
+</param>
+            <returns>A media source.</returns>
+stream-&gt;AddTrack(video_track);
+</member>
+        <member name="M:Org.WebRtc.Media.GetUserMedia(Org.WebRtc.RTCMediaStreamConstraints)">
+            <summary>
+In order for this method to complete successfully, the user must have
+allowed the application permissions to use the devices for the
+requested media types (microphone for audio, webcam for video).
+Creates a <see cref="T:Org.WebRtc.MediaStream" /> with both audio and video tracks,
+unless the <paramref name="mediaStreamConstraints" />
+is set to exclude either media type.
+</summary>
+            <param name="mediaStreamConstraints">Controls whether video/audio
+tracks are included.</param>
+            <returns>
+This is an asynchronous method. The result upon completion is a
+<see cref="T:Org.WebRtc.MediaStream" /> including
+audio and/or video tracks, as requested by the
+<paramref name="mediaStreamConstraints" /> parameter.
+</returns>
+        </member>
+        <member name="T:Org.WebRtc.Media">
+            <summary>
+Defines methods for accessing local media devices, like microphones
+and video cameras, and creating multimedia streams.
+</summary>
+            <remarks>
+http://www.w3.org/TR/mediacapture-streams
+</remarks>
+        </member>
+        <member name="E:Org.WebRtc.EncodedVideoSource.OnEncodedVideoFrame">
+            <summary>
+Raw video frame has been received.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.EncodedVideoSource">
+            <summary>
+Source of encoded video samples.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.EncodedVideoStream">
+            <summary>
+Encoded video stream used as a sink for encoded frames in webrtc engine.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RawVideoSource.OnRawVideoFrame">
+            <summary>
+Raw video frame has been received.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RawVideoSource">
+            <summary>
+Source of raw video samples.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RawVideoStream">
+            <summary>
+Raw video stream used as a sink for raw frames in webrtc engine.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCMediaStreamConstraints.videoEnabled">
+            <summary>
+Sets or gets the availability of video.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCMediaStreamConstraints.audioEnabled">
+            <summary>
+Set or gets the availability of audio.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCMediaStreamConstraints">
+            <summary>
+Allows defining constraints to exclude media types from a
+<see cref="T:Org.WebRtc.MediaStream" />.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.MediaDevice.GetVideoCaptureCapabilities">
+            <summary>
+Retrieves video capabilities for a given device.
+</summary>
+            <returns>This is an asynchronous method. The result is a vector of the
+capabilities supported by the video device.</returns>
+        </member>
+        <member name="P:Org.WebRtc.MediaDevice.Location">
+            <summary>
+Get the location of the media device.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaDevice.Name">
+            <summary>
+Get or sets a displayable name that describes the media device.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaDevice.Id">
+            <summary>
+Gets or sets an identifier of the media device.
+This value defaults to a unique OS assigned identifier of the media device.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.MediaDevice">
+            <summary>
+Represents a local media device, such as a microphone or a camera.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.FrameRateDescription">
+            <summary>
+Get a displayable string describing the frame rate in
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.ResolutionDescription">
+            <summary>
+Get a displayable string describing the resolution of a
+video capture device capability.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.FullDescription">
+            <summary>
+Get a displayable string describing all the features of a
+video capture device capability. Displays resolution, frame rate,
+and pixel aspect ratio.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.PixelAspectRatio">
+            <summary>
+Get the aspect ratio of the pixels of a video capture device capibility.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.FrameRate">
+            <summary>
+Gets the frame rate in frames per second of a video capture device capibility.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.Height">
+            <summary>
+Gets the height in pixes of a video capture device capibility.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CaptureCapability.Width">
+            <summary>
+Gets the width in pixes of a video capture device capibility.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.CaptureCapability.#ctor(System.UInt32,System.UInt32,System.UInt32,Windows.Media.MediaProperties.MediaRatio)">
+            <summary>
+CaptureCapability constructor.
+</summary>
+            <param name="width">Sets the width in pixels of a capability on the video capture device.</param>
+            <param name="height">Sets the height in pixesl of a capability on the video capture device.</param>
+            <param name="fps">Set the frames per second of a capability on the video capture device.</param>
+            <param name="pixelAspect">Sets the shape of a pixel. Some codecs, such as H.264, support
+non-square pixels. Codecs that support only square pixes, such as VPx, will force a 1:1 ratio.</param>
+        </member>
+        <member name="T:Org.WebRtc.CaptureCapability">
+            <summary>
+Represents video camera capture capabilities.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaStream.Active">
+            <summary>
+This attribute is true if the <see cref="T:Org.WebRtc.MediaStream" /> has at least
+one <see cref="T:Org.WebRtc.IMediaStreamTrack" />
+that has not ended, and false otherwise.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaStream.Id">
+            <summary>
+Gets an identifier of the media stream.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.RemoveTrack(Org.WebRtc.IMediaStreamTrack)">
+            <summary>
+Removes the given <see cref="T:Org.WebRtc.IMediaStreamTrack" /> from this
+<see cref="T:Org.WebRtc.MediaStream" />.
+</summary>
+            <param name="track">Track to be removed from the
+<see cref="T:Org.WebRtc.MediaStream" /></param>
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.AddTrack(Org.WebRtc.IMediaStreamTrack)">
+            <summary>
+Adds the given <see cref="T:Org.WebRtc.IMediaStreamTrack" /> to this
+<see cref="T:Org.WebRtc.MediaStream" />.
+</summary>
+            <param name="track">Track to be added to the
+<see cref="T:Org.WebRtc.MediaStream" /></param>
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.GetTrackById(System.String)">
+            <summary>
+Return either a <see cref="T:Org.WebRtc.IMediaStreamTrack" /> object from
+this stream's track set whose id is
+equal to trackId, or nullptr, if no such track exists.
+</summary>
+            <param name="trackId">The identifier of the track to return</param>
+            <returns>A <see cref="T:Org.WebRtc.IMediaStreamTrack" /> object from this stream's
+track set whose id is
+equal to trackId, or nullptr, if no such track exists.</returns>
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.GetTracks">
+            <summary>
+Returns a Vector that represents a snapshot of all the
+<see cref="T:Org.WebRtc.IMediaStreamTrack" /> objects
+in this stream's track set, regardless of kind.
+</summary>
+            <returns>A Vector of <see cref="T:Org.WebRtc.IMediaStreamTrack" /> objects
+representing all the tracks in this stream.</returns>
+            <seealso cref="M:Org.WebRtc.MediaStream.GetAudioTracks" />
+            <seealso cref="M:Org.WebRtc.MediaStream.GetVideoTracks" />
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.GetVideoTracks">
+            <summary>
+Returns a Vector that represents a snapshot of all the
+<see cref="T:Org.WebRtc.IMediaStreamTrack" /> objects
+in this stream's track set whose kind is equal to "video".
+</summary>
+            <returns>A Vector of <see cref="T:Org.WebRtc.IMediaStreamTrack" /> objects
+representing the video tracks in this stream</returns>
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.GetAudioTracks">
+            <summary>
+Returns a Vector that represents a snapshot of all the
+<see cref="T:Org.WebRtc.IMediaStreamTrack" /> objects
+in this stream's track set whose kind is equal to "audio".
+</summary>
+            <returns>A Vector of <see cref="T:Org.WebRtc.IMediaStreamTrack" />
+objects representing the audio tracks in this stream</returns>
+        </member>
+        <member name="M:Org.WebRtc.MediaStream.#ctor(rtc.scoped_refptr&lt;webrtc.MediaStreamInterface&gt;)">
+            <summary>
+Composes a new stream.
+</summary>
+            <param name="impl" />
+        </member>
+        <member name="T:Org.WebRtc.MediaStream">
+            <summary>
+A MediaStream is used to group several <see cref="T:Org.WebRtc.IMediaStreamTrack" />
+objects into one unit that can be recorded or rendered in a media
+element. Each MediaStream can contain zero or more
+ <see cref="T:Org.WebRtc.IMediaStreamTrack" /> objects.
+</summary>
+            <remarks>
+http://www.w3.org/TR/mediacapture-streams/
+</remarks>
+        </member>
+        <member name="M:Org.WebRtc.MediaAudioTrack.Stop">
+            <summary>
+Stops the media and releases associated resources.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaAudioTrack.Enabled">
+            <summary>
+Get and sets the availibility of the media.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaAudioTrack.Id">
+            <summary>
+Gets an identifier of the media track.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaAudioTrack.Kind">
+            <summary>
+Gets a description of the type of media, e.g., "audio" or "video".
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.MediaAudioTrack">
+            <summary>
+Represents audio media that originates from one audio source.
+</summary>
+            <seealso cref="T:Org.WebRtc.IMediaStreamTrack" />
+        </member>
+        <member name="M:Org.WebRtc.MediaVideoTrack.Stop">
+            <summary>
+Stops the media and releases associated resources.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaVideoTrack.Suspended">
+            <summary>
+Determines or set whether the media track is paused.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaVideoTrack.Enabled">
+            <summary>
+Get and sets the availibility of the media.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaVideoTrack.Id">
+            <summary>
+Gets an identifier of the media track.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.MediaVideoTrack.Kind">
+            <summary>
+Gets a description of the type of media, e.g., "audio" or "video".
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.MediaVideoTrack">
+            <summary>
+Represents video media that originates from one video source.
+</summary>
+            <seealso cref="T:Org.WebRtc.IMediaStreamTrack" />
+        </member>
+        <member name="M:Org.WebRtc.IMediaStreamTrack.Stop">
+            <summary>
+Stop the media track.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.IMediaStreamTrack.Enabled">
+            <summary>
+Get and sets the availibility of the media.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.IMediaStreamTrack.Id">
+            <summary>
+Gets an identifier of the media track.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.IMediaStreamTrack.Kind">
+            <summary>
+Gets a description of the type of media, e.g., "audio" or "video".
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.IMediaStreamTrack">
+            <summary>
+An IMediaStreamTrack object represents media of a single type that
+originates from one media source, e.g. video produced by a web camera.
+</summary>
+            <remarks>
+http://www.w3.org/TR/mediacapture-streams
+</remarks>
+        </member>
+        <member name="F:Org.WebRtc.globals.gThread">
+            <summary>
+The worker thread for webrtc.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.IceConnectionState">
+            <summary>
+Gets the state of the connection.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.IceGatheringState">
+            <summary>
+Gets the ICE gathering state such as New, Gathering, or Complete.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.SignalingState">
+            <summary>
+Keeps track of the current signaling state. State transitions may be
+ triggered when alocal or remote offer is applied, when a local or remote
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.RemoteDescription">
+            <summary>
+The last <see cref="T:Org.WebRtc.RTCSessionDescription" /> that was successfully set
+using <see cref="M:Org.WebRtc.RTCPeerConnection.SetRemoteDescription(Org.WebRtc.RTCSessionDescription)" />,
+plus any remote candidates that have been supplied via
+<see cref="M:Org.WebRtc.RTCPeerConnection.AddIceCandidate(Org.WebRtc.RTCIceCandidate)" /> since then.
+A nullptr handle will be returned if the local description has not yet
+been set.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.LocalDescription">
+            <summary>
+The last <see cref="T:Org.WebRtc.RTCSessionDescription" /> that was successfully set
+using <see cref="M:Org.WebRtc.RTCPeerConnection.SetLocalDescription(Org.WebRtc.RTCSessionDescription)" />, plus any local candidates that
+have been generated by the ICE Agent since then.
+A nullptr handle will be returned if the local description has not yet
+been set.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.RtcStatsDestinationPort">
+            <summary>
+Port of the machine to send WebRTC statistics to.
+Default value: 47005
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.RtcStatsDestinationHost">
+            <summary>
+Hostname of the machine to send WebRTC statistics to.
+The machine should accept TCP connections at port configurable using 
+<see cref="P:Org.WebRtc.RTCPeerConnection.RtcStatsDestinationPort" /> property.
+Default value: localhost
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.SendRtcStatsToRemoteHostEnabled">
+            <summary>
+Enable/Disable send of WebRTC statistics in JSON format to a TCP server.
+Destination can be configured using <see cref="P:Org.WebRtc.RTCPeerConnection.RtcStatsDestinationHost" />
+and <see cref="P:Org.WebRtc.RTCPeerConnection.RtcStatsDestinationPort" />.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.RtcStatsEnabled">
+            <summary>
+Enable/Disable WebRTC statistics for exposing report.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.ConnectionHealthStatsEnabled">
+            <summary>
+Enable/Disable connection health statistics.
+When new connection health stats are available OnConnectionHealthStats
+ event is raised.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnection.EtwStatsEnabled">
+            <summary>
+Enable/Disable WebRTC statistics to ETW.
+</summary>;
+</member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.Close">
+            <summary>
+Ends any active ICE processing or streaming, releases resources.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.AddIceCandidate(Org.WebRtc.RTCIceCandidate)">
+            <summary>
+Provides a remote candidate to the ICE Agent.
+The candidate is added to the remote description.
+This call will result in a change to the connection state of the ICE
+Agent, and may lead to a change to media state if it results in different
+connectivity being established.
+</summary>
+            <param name="candidate">candidate to be added to the remote description
+</param>
+            <returns>An action which completes asynchronously</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.CreateDataChannel(System.String,Org.WebRtc.RTCDataChannelInit)">
+            <summary>
+Creates a new <see cref="T:Org.WebRtc.RTCDataChannel" /> object with the given
+<paramref name="label" />.
+</summary>
+            <param name="label">Used as the descriptive name for the new data
+channel.</param>
+            <param name="init">Can be used to configure properties of the underlying
+channel such as data reliability.</param>
+            <returns>The newly created <see cref="T:Org.WebRtc.RTCDataChannel" />.</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.RemoveStream(Org.WebRtc.MediaStream)">
+            <summary>
+Removes a local <see cref="T:Org.WebRtc.MediaStream" /> from this connection.
+</summary>
+            <param name="stream">
+                <see cref="T:Org.WebRtc.MediaStream" /> to be removed.</param>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.AddStream(Org.WebRtc.MediaStream)">
+            <summary>
+Adds a new local <see cref="T:Org.WebRtc.MediaStream" /> to be sent on this connection.
+</summary>
+            <param name="stream">
+                <see cref="T:Org.WebRtc.MediaStream" /> to be added.</param>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.GetStreamById(System.String)">
+            <summary>
+If this object is currently sending or receiving a
+<see cref="T:Org.WebRtc.MediaStream" /> with the provided
+<paramref name="streamId" />, a handle to that stream is returned.
+</summary>
+            <param name="streamId">Identifier of the stream being requested.</param>
+            <returns>A handle to the local or remote <see cref="T:Org.WebRtc.MediaStream" /> with
+the given <paramref name="streamId" /> if one exists, nullptr if no stream
+is found.</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.GetRemoteStreams">
+            <summary>
+Returns an <see cref="T:Windows.Foundation.Collections.IVector`1" /> that represents a snapshot of all the
+<see cref="T:Org.WebRtc.MediaStream" /> that this <see cref="T:Org.WebRtc.RTCPeerConnection" /> is
+currently receiving.
+</summary>
+            <returns>A sequence of handles to the <see cref="T:Org.WebRtc.MediaStream" /> objects
+representing the streams that are currently being received by this
+RTCPeerConnection object.</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.GetLocalStreams">
+            <summary>
+Returns an <see cref="T:Windows.Foundation.Collections.IVector`1" /> that represents a snapshot of all the
+<see cref="T:Org.WebRtc.MediaStream" />
+that this <see cref="T:Org.WebRtc.RTCPeerConnection" /> is currently sending.
+</summary>
+            <returns>A sequence of handles to the <see cref="T:Org.WebRtc.MediaStream" />
+objects representing the streams that are currently being sent
+with this RTCPeerConnection object.</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.GetConfiguration">
+            <summary>
+Gets the configuration of this connection.
+</summary>
+            <returns>A handle to the current configuration for this object.</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.SetRemoteDescription(Org.WebRtc.RTCSessionDescription)">
+            <summary>
+Instructs the <see cref="T:Org.WebRtc.RTCPeerConnection" /> to apply the supplied
+<see cref="T:Org.WebRtc.RTCSessionDescription" /> as the remote offer or answer.
+This API changes the local media state.
+</summary>
+            <param name="description">
+                <see cref="T:Org.WebRtc.RTCSessionDescription" /> to
+apply as the local description</param>
+            <returns>An action which completes asynchronously</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.SetLocalDescription(Org.WebRtc.RTCSessionDescription)">
+            <summary>
+Instructs the <see cref="T:Org.WebRtc.RTCPeerConnection" /> to apply the supplied
+<see cref="T:Org.WebRtc.RTCSessionDescription" /> as the local description.
+This API changes the local media state.
+</summary>
+            <param name="description">RTCSessionDescription to apply as the local
+description</param>
+            <returns>An action which completes asynchronously</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.CreateAnswer">
+            <summary>
+Generates an SDP answer with the supported configuration for the
+session that is compatible with the parameters in the remote
+configuration. Like createOffer, the returned blob contains descriptions
+of the local MediaStreams attached to this
+<see cref="T:Org.WebRtc.RTCPeerConnection" />, the codec/RTP/RTCP options negotiated
+for this session, and any candidates that have been gathered by the ICE
+Agent.
+</summary>
+            <returns>An action which completes asynchronously</returns>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.CreateOffer">
+            <summary>
+Generates a blob of SDP that contains an RFC 3264 offer with the
+ supported configurations for the session, including descriptions of
+the local MediaStreams attached to this <see cref="T:Org.WebRtc.RTCPeerConnection" />,
+the codec/RTP/RTCP options supported by this implementation, and any
+candidates that have been gathered by the ICE Agent.
+</summary>
+            <returns />
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnRTCStatsReportsReady">
+            <summary>
+Webrtc statistics report is ready <see cref="D:Org.WebRtc.RTCStatsReports" />.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnConnectionHealthStats">
+            <summary>
+New connection health stats are available.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnDataChannel">
+            <summary>
+A remote peer has opened a data channel.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnSignalingStateChange">
+            <summary>
+A state transition has occurred for the <see cref="P:Org.WebRtc.RTCPeerConnection.SignalingState" />.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnNegotiationNeeded">
+            <summary>
+Session (re-)negotiation is needed.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnRemoveStream">
+            <summary>
+The remote peer removed a <see cref="T:Org.WebRtc.MediaStream" />.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnAddStream">
+            <summary>
+The remote peer has added a new <see cref="T:Org.WebRtc.MediaStream" /> to this
+connection.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnIceConnectionChange">
+            <summary>
+A state transition has occurred for the <see cref="P:Org.WebRtc.RTCPeerConnection.IceConnectionState" />.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCPeerConnection.OnIceCandidate">
+            <summary>
+A new ICE candidate has been found.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.RTCPeerConnection.#ctor(Org.WebRtc.RTCConfiguration)">
+            <summary>
+Creates an RTCPeerConnection object.
+</summary>
+            <remarks>
+Refer to http://www.w3.org/TR/webrtc for the RTCPeerConnection
+construction algorithm
+</remarks>
+            <param name="configuration">
+The configuration has the information to find and access the
+servers used by ICE.
+</param>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnection">
+            <summary>
+An RTCPeerConnection allows two users to communicate directly.
+Communications are coordinated via a signaling channel which is
+provided by unspecified means.
+</summary>
+            <remarks>
+http://www.w3.org/TR/webrtc/#peer-to-peer-connections
+ </remarks>
+        </member>
+        <member name="P:Org.WebRtc.MediaStreamEvent.Stream">
+            <summary>
+Gets or sets a media stream object.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.MediaStreamEvent">
+            <summary>
+Stores media stream object received by an event.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCStatsReportsReadyEvent.rtcStatsReports">
+            <summary>
+Gets or sets peer connection statistics.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCStatsReportsReadyEvent">
+            <summary>
+Stores peer connection statistics received by an event.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.RemoteCandidateType">
+            <summary>
+Stores a description of the ICE candidate connected to a remote peer.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.LocalCandidateType">
+            <summary>
+Stores a description of the ICE candidate connected to this peer.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.RTT">
+            <summary>
+Gets or set the round-trip time.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.SentKbps">
+            <summary>
+Gets or sets the send bit rate in Kilobits per second.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.SentBytes">
+            <summary>
+Gets or sets the number of bytes sent during the
+lifetime of a peer connection.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.ReceivedKpbs">
+            <summary>
+Gets or sets the receive bit rate in Kilobits per second.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionHealthStats.ReceivedBytes">
+            <summary>
+Gets or sets the number of bytes received during the
+lifetime of a peer connection.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnectionHealthStats">
+            <summary>
+Stores peer connection statistics.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionIceStateChangeEvent.State">
+            <summary>
+Gets or sets the ICE peer connection state.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnectionIceStateChangeEvent">
+            <summary>
+Stores ICE peer connection state received by an event.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCPeerConnectionIceEvent.Candidate">
+            <summary>
+Gets or set ICE candidate parameters.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnectionIceEvent">
+            <summary>
+Stores ICE candidate parameters received by an event.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCSessionDescription.Sdp">
+            <summary>
+Gets or sets the complete raw SDP.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCSessionDescription.Type">
+            <summary>
+Gets or sets the SDP type.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCSessionDescription">
+            <summary>
+An SDP blob and an associated <see cref="T:Org.WebRtc.RTCSdpType" />.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCIceCandidate.SdpMLineIndex">
+            <summary>
+Sets or get the "m=" line used as the ICE candidate in the SDP.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCIceCandidate.SdpMid">
+            <summary>
+Gets or sets the SDP media identifier.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCIceCandidate.Candidate">
+            <summary>
+Gets or sets the name of the ICE candidate.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCIceCandidate">
+            <summary>
+Stores ICE candidate parameters.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCConfiguration.BundlePolicy">
+            <summary>
+Get or sets the ICE server transport connection policy.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCConfiguration.IceTransportPolicy">
+            <summary>
+Gets or sets the transport policy of the ICE servers.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCConfiguration.IceServers">
+            <summary>
+Gets or sets a list of ICE servers and their configuration parameters.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCConfiguration">
+            <summary>
+Stores the ICE servers configuration.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCIceServer.Credential">
+            <summary>
+Gets or sets the credentials to login to the ice server.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCIceServer.Username">
+            <summary>
+Gets or set a user name to login to the ice server.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCIceServer.Url">
+            <summary>
+Gets or sets an ICE server network address as a URL.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCIceServer">
+            <summary>
+Stores the configuration parameters of an ICE server.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCSdpType">
+            <summary>
+Describes the type of an SDP blob.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.WinJSHooks">
+            <summary>
+Wrapper class that allows calling methods in <see cref="T:Org.WebRtc.WebRTC" /> from WinJS.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.WebRTC.MemoryUsage">
+            <summary>
+Memory usage statistics data (in bytes). Should be set by application.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.WebRTC.CpuUsage">
+            <summary>
+CPU usage statistics data (in percents). Should be set by application.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.SynNTPTime(System.Int64)">
+            <summary>
+Synchronization with NTP is needed for end to end delay measurements,
+which involve multiple devices.
+</summary>
+            <param name="currentNtpTime">NTP time in miliseconds.</param>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.SetPreferredVideoCaptureFormat(System.Int32,System.Int32,System.Int32)">
+            <summary>
+This method can be used to overwrite the preferred camera capabilities.
+</summary>
+            <param name="frameWidth">Image width.</param>
+            <param name="frameHeight">Image height.</param>
+            <param name="fps">Frames per second.</param>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.GetVideoCodecs">
+            <summary>
+Retrieves the video codecs supported by the device.
+</summary>
+            <returns>A vector of supported video codecs.</returns>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.GetAudioCodecs">
+            <summary>
+Retrieves the audio codecs supported by the device.
+</summary>
+            <returns>A vector of supported audio codecs.</returns>
+        </member>
+        <member name="P:Org.WebRtc.WebRTC.LogFileName">
+            <summary>
+The name of the file where the app is currently saving the logging information.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.WebRTC.LogFolder">
+            <summary>
+The folder where the app is currently saving the logging information.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.DisableLogging">
+            <summary>
+Stops WebRTC logging.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.EnableLogging(Org.WebRtc.LogLevel)">
+            <summary>
+Starts WebRTC logging.
+</summary>
+            <param name="level">Desired verbosity level for logging.</param>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.SaveTrace(System.String,System.Int32)">
+            <summary>
+Can be used for sending the trace information from a device to a TCP client application
+running on a remote machine.
+</summary>
+            <param name="host">The IP or name of the machine the trace information is collected on.</param>
+            <param name="port">The port of the machine the trace information is collected on.</param>
+            <returns>True if the socket to send trace information is created successfully,
+false otherwise.</returns>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.SaveTrace(System.String)">
+            <summary>
+Saves the collected WebRTC trace information to a file.
+</summary>
+            <param name="filename">Path of the file to save trace information to.</param>
+            <returns>True if trace information was saved successfully, false otherwise.</returns>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.StopTracing">
+            <summary>
+Stops WebRTC tracing.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.StartTracing">
+            <summary>
+Starts WebRTC tracing.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.IsTracing">
+            <summary>
+Check if WebRTC tracing is currently enabled.
+</summary>
+            <returns>True if WebRTC tracing is currently enabled, false otherwise.</returns>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.Initialize(Windows.UI.Core.CoreDispatcher)">
+            <summary>
+Initializes WebRTC dispatch and worker threads.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.WebRTC.RequestAccessForMediaCapture">
+            <summary>
+Gets permission from the OS to get access to a media capture device. If
+permissions are not enabled for the calling application, the OS will
+display a prompt asking the user for permission.
+This function must be called from the UI thread.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.WebRTC">
+            <summary>
+Defines static methods for handling generic WebRTC operations, for example
+controlling whether WebRTC tracing is enabled.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CodecInfo.Name">
+            <summary>
+Get or sets a display name that represents the codec.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CodecInfo.ClockRate">
+            <summary>
+Get or sets a clock rate in cycles per second.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.CodecInfo.Id">
+            <summary>
+Get or sets a unique identifier that represents a codec.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.CodecInfo">
+            <summary>
+Defines the paremeters of a media codec.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelEventDelegate">
+            <summary>
+Delegate for receiving data channel events.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelEvent.Channel">
+            <summary>
+Returns a channel connection object.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelEvent">
+            <summary>
+Message from a data channel event.
+</summary>
+        </member>
+        <member name="M:Org.WebRtc.RTCDataChannel.Send(Org.WebRtc.IDataChannelMessage)">
+            <summary>
+Attempts to send data on channel's underlying data transport.
+</summary>
+            <param name="data">Message to be sent.</param>
+        </member>
+        <member name="M:Org.WebRtc.RTCDataChannel.Close">
+            <summary>
+Closes the data channel connection.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCDataChannel.OnError">
+            <summary>
+Event triggered when an error occurs.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCDataChannel.OnClose">
+            <summary>
+Event triggered when a data channel is closed.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCDataChannel.OnOpen">
+            <summary>
+Event triggered when a data channel is opened.
+</summary>
+        </member>
+        <member name="E:Org.WebRtc.RTCDataChannel.OnMessage">
+            <summary>
+Event triggered when a message is successfully received.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.BufferedAmount">
+            <summary>
+The number of bytes of application data (UTF-8 text and binary data) that have been queued but that, 
+as of the last time the event loop started executing a task, had not yet been transmitted to the network.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.ReadyState">
+            <summary>
+The state of the RTCDataChannel object.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.Id">
+            <summary>
+Unique identifier for the data channel.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.Negotiated">
+            <summary>
+true if this RTCDataChannel was negotiated by the application, false otherwise.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.Protocol">
+            <summary>
+The name of the sub-protocol used with this RTCDataChannel if any.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.MaxRetransmits">
+            <summary>
+Maximum number of retransmissions that are attempted in unreliable mode, or nullptr if unset.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.MaxPacketLifeTime">
+            <summary>
+Length of the time window (in milliseconds) during which transmissions and retransmissions may occur in 
+unreliable mode, or nullptr if unset. 
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.Ordered">
+            <summary>
+true if the<see cref="T:Org.WebRtc.RTCDataChannel" /> is ordered, and false if other of order delivery is allowed.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannel.Label">
+            <summary>
+Can be used to distinguish this <see cref="T:Org.WebRtc.RTCDataChannel" /> object from other <see cref="T:Org.WebRtc.RTCDataChannel" /> 
+objects. Uniqueness is not guaranteed for labels.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannel">
+            <summary>
+Represents a bi-directional data channel between two peers.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelMessageEvent">
+            <summary>
+Event data received from a data channel.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.BinaryDataChannelMessage">
+            <summary>
+Message type used for sending binary data (a file, for example) over a data channel.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.StringDataChannelMessage">
+            <summary>
+Message type used for sending strings (chat messages, for example) over a data channel.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.IDataChannelMessage">
+            <summary>
+Interface for determining the data type of a data channel message.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelMessageType">
+            <summary>
+Type of messages for a <see cref="T:Org.WebRtc.RTCDataChannel" />.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelInit.Id">
+            <summary>
+Unique identifier for the data channel.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelInit.Negotiated">
+            <summary>
+true if this RTCDataChannel was negotiated by the application, false otherwise.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelInit.Protocol">
+            <summary>
+The name of the sub-protocol used with this RTCDataChannel if any.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelInit.MaxRetransmits">
+            <summary>
+Maximum number of retransmissions that are attempted in unreliable mode, or nullptr if unset.
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelInit.MaxPacketLifeTime">
+            <summary>
+Length of the time window (in milliseconds) during which transmissions and retransmissions may occur in 
+unreliable mode, or nullptr if unset. 
+</summary>
+        </member>
+        <member name="P:Org.WebRtc.RTCDataChannelInit.Ordered">
+            <summary>
+true if the<see cref="T:Org.WebRtc.RTCDataChannel" /> is ordered, and false if other of order delivery is allowed.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelInit">
+            <summary>
+Can be used to configure properties of the underlying channel such as data reliability.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelState">
+            <summary>
+Used to keep track of a <see cref="T:Org.WebRtc.RTCDataChannel" />'s state.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.MediaDevicesChanged">
+            <summary>
+Delegate for receiving audio/video device change notification.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCDataChannelMessageEventDelegate">
+            <summary>
+Delegate for receiving raw data from a data channel.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.MediaStreamEventEventDelegate">
+            <summary>
+Delegate for receiving new media stream events.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCStatsReportsReadyEventDelegate">
+            <summary>
+Delegate for receiving a list of statistics.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnectionHealthStatsDelegate">
+            <summary>
+Delegate for receiving ICE connection health update. This receives a connection state.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnectionIceStateChangeEventDelegate">
+            <summary>
+Delegate for receiving ICE connection state changes.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCPeerConnectionIceEventDelegate">
+            <summary>
+Delegate for receiving ICE connections events for ICE candidates.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.EncodedVideoSourceDelegate">
+            <summary>
+Delegate for receiving video frames from EncodedVideoSource.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RawVideoSourceDelegate">
+            <summary>
+Delegate for receiving video frames from RawVideoSource.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.EventDelegate">
+            <summary>
+Generic delegate declaration.
+</summary>
+        </member>
+        <member name="T:Org.WebRtc.RTCStatsReport">
+            <summary>
+CX object of webrtc::StatsReport
+</summary>
+        </member>
+        <member name="M:webrtc.IceCandidateInterface.sdp_mid">
+If present, this contains the identierfier of the "media stream
+</member>
+    </members>
+</doc>
